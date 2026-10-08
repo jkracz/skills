@@ -1,6 +1,7 @@
 ---
 name: code-cleanse
 description: Remove AI-generated clutter from code and tests. Use when asked to unslop or trim generated changes, especially redundant comments and brittle, defensive, or excessive tests.
+disable-model-invocation: true
 ---
 
 # Code cleanse
