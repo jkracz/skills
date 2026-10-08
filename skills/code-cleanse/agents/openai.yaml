@@ -1,0 +1,5 @@
+interface:
+  display_name: "Code Cleanse"
+  short_description: "Trim redundant comments and low-value tests"
+policy:
+  allow_implicit_invocation: false
