@@ -1,0 +1,5 @@
+interface:
+  display_name: "Whiteboard"
+  short_description: "Quiz me on how a PR or feature works, then score me"
+policy:
+  allow_implicit_invocation: false
