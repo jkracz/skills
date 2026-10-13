@@ -1,5 +1,5 @@
 ---
-name: babysit
+name: babysit-pr
 description: Watch a PR through CI and review until it's mergeable — fix what matters, reply to what doesn't. Use when asked to babysit, watch, or shepherd a PR.
 ---
 
