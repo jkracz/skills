@@ -34,6 +34,6 @@ Check every finding against the current code before acting on it.
 - Keep watching through re-reviews your own pushes trigger.
 - Stop at whichever comes first:
   - Checks are green and the latest review has nothing unaddressed.
-  - 3 fix rounds. <!-- decide: cap -->
+  - 3 fix rounds.
 - Then `unwatch_pull_request` and report what you fixed, what you skipped and why, and anything that needs my decision.
 - Never merge unless explicitly asked.
