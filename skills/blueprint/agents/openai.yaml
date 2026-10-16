@@ -1,0 +1,5 @@
+interface:
+  display_name: "Blueprint"
+  short_description: "Visual HTML brief of how a PR or feature is built"
+policy:
+  allow_implicit_invocation: false
