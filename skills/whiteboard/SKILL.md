@@ -8,31 +8,31 @@ disable-model-invocation: true
 
 Interview me the way a staff engineer runs a design review: I explain how something works, you probe until you know where my understanding ends, then you teach me what I got wrong and score me.
 
-Test architecture and reasoning, not recall. Ask about flows, boundaries, state ownership, decisions and their tradeoffs, invariants, failure modes, and change impact. Never ask for function names, signatures, file locations, component names, or anything I would normally look up. Start from a user scenario, but ask about the mechanism, the reason, or what breaks, not what the product does.
+Test architecture and reasoning, not recall. Ask about flows, boundaries, state ownership, decisions and their tradeoffs, invariants, failure modes, and change impact. Never ask for anything I'd normally look up: names, file locations, business rules, orderings, or permission tables. Ask instead why a rule exists, what enforces it, or what breaks without it. Frame questions with a one-sentence user scenario, without roles or statuses unless the mechanism depends on them, then ask about the mechanism, the reason, or what breaks, not what the product does.
 
 ## Pick the target
 
-- With no argument, use PR mode if the current branch differs from the default branch, otherwise codebase mode. A PR may be someone else's; then the question is whether I understand it well enough to approve it.
+- With no argument, use PR mode if the current branch differs from the default branch, otherwise codebase mode. A PR may be someone else's; then the question is whether I understand its design well enough to approve it: could I predict how it breaks, and know where to look?
 - In codebase mode with no topic, offer three consequential features or subsystems and let me pick or say "surprise me". Favor areas I haven't committed to.
 
 ## Prepare in silence
 
 Read the diff and the code around it, the PR description, linked issues, and relevant documentation. Build a private answer key covering the areas above, ranked by consequence. Ask about the decisions everything else depends on, and skip incidental implementation details. Never show the answer key.
 
-Split the target into segments by concern, not by file: 3–6 for a substantial PR or topic, fewer for a small one. If a PR is too trivial to discuss architecturally, say so and offer to widen to the system it touches.
+Split the target into segments, one per independent design decision, at most four. If a PR is too trivial to discuss architecturally, say so and offer to widen to the system it touches.
 
-Show me the agenda as neutral titles that reveal no answers, e.g. "How ingestion is triggered", not "The new push-based webhook queue". Let me reorder or skip segments.
+Show me the agenda as neutral titles that reveal no answers, e.g. "How ingestion is triggered", not "The new push-based webhook queue". Say roughly how many questions to expect. Let me reorder or skip segments.
 
 ## Run each segment
 
-Ask one question at a time.
+Ask one single-part question at a time.
 
 1. **Open** broadly and let me explain.
-2. **Probe** with 2–4 follow-ups, each aimed at one thing:
+2. **Probe** with up to three follow-ups, each aimed at one thing:
    - A vague claim: make me name the mechanism ("it syncs" → "What triggers the sync, and who waits on it?").
    - A consequential gap: ask about something important I didn't mention, without naming it.
-   - A wrong claim: don't correct it. Ask about its consequence so I can catch it myself.
-3. **Adapt.** If I'm solid, go a level deeper into concurrency, scale, or a changed requirement. If I'm struggling, step back to the overall shape.
+   - A wrong claim: don't correct it. Ask what the system does as a result, not what it should do, and stop once I see it.
+3. **Adapt.** If I'm solid, go one level deeper into concurrency, scale, or a changed requirement, then move on. If I'm struggling or don't know, ask one question about the overall shape, then close the segment.
 4. **Debrief** when the segment closes.
 
 Never put the answer in the question. "What happens when a sync fails halfway?" is fine; "How does the retry queue preserve ordering when two workers claim the same job?" gives away a queue, retries, and a race. Don't praise or react to answers mid-segment. "I don't know" is a good answer; acknowledge it and move on.
@@ -50,7 +50,7 @@ Classify each miss:
 For each misconception and gap:
 
 1. **You said:** my words, quoted.
-2. **Actually:** the real behavior in a few sentences, or a short step-by-step trace for flows.
+2. **Actually:** the real behavior in a sentence or two, or a short step-by-step trace for flows.
 3. **Why it matters:** what my version would lead me to get wrong.
 4. **Source:** one or two files or docs. Say when it's your inference.
 
