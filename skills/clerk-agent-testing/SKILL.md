@@ -67,7 +67,7 @@ Set up organizations, memberships, and metadata roles through `clerk-dev api` wi
 
 ### Clean up
 
-When testing is done, list the users and organizations you created this run in the handoff and offer to delete them; the human decides. Delete only agent-owned ones:
+When testing is done, always delete test users and organizations unless told otherwise by the user. Delete only agent-owned ones:
 
 ```sh
 clerk-dev api -X DELETE /users/<user_id> --yes
